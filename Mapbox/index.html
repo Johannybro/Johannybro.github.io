@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Places in Pulp Fiction</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #be2231;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        #map {
+            position: fixed;
+            width: 50%;
+        }
+
+        #features {
+            width: 50%;
+            margin-left: 50%;
+            font-family: sans-serif;
+            overflow-y: scroll;
+            background-color: #b93440;
+        }
+
+        section {
+            padding: 25px 50px;
+            line-height: 25px;
+            border-bottom: 1px solid #be2231;
+            opacity: 0.25;
+            font-size: 13px;
+            background: #be2231;
+
+        }
+
+        section.active {
+            opacity: 1;
+        }
+
+        section:last-child {
+            border-bottom: none;
+            margin-bottom: 200px;
+        }
+
+        #jimmie {
+            margin-bottom: 500px;
+        }
+
+        h3 {
+            font-family: "Alfa slab one";
+            font-size: 2.3em;
+            color: #f2ad2f;
+            text-align: center;
+            text-shadow: 2px 2px #f35230;
+
+        }
+
+        img {
+            float: left;
+            padding-bottom: 10px;
+        }
+    </style>
+
+    <div id='map'></div>
+    <div id='features'>
+        <section id='ezekiel' class='active'>
+            <h3>Ezekiel 25:17</h3><img src="images/bigkahuna.png" width="150px" height="150px" alt="Burger">
+            <p><b>1525 North Van Ness Avenue
+            Los Angeles, CA 90028</b><br>Hitmen Jules Winnfield and Vincent Vega arrive at an apartment to retrieve a briefcase for their boss, gangster Marsellus Wallace, from an associate, Brett. After Vincent checks the contents of the briefcase, Jules shoots one of Brett's associates, then declaims a passage from the Bible before he and Vincent kill Brett for trying to double-cross Marsellus.</p>
+        </section>
+        <section id='motherfucker'>
+            <h3>Bad Motherfucker</h3><img src="images/Badmotherfucker.png" width="200px" height="200px" alt="Badmothefucker">
+            <p><b>Hawthorne Grill, 13763 Hawthorne Boulevard, Hawthorne, Los Angeles</b><br>Pulp Fiction starts with Pumpkin and Honey Bunny, a couple of petty criminals, discussing how it became too dangerous to rob liquor stores and the likes nowadays. After a brief discussion they come to the conclusion that the diner where they are currently having breakfast at is the ideal place for a robbery as the manager and employees won't oppose any resistance. Cherry on top and a detail that will have quite some importance in the plot later on: besides taking the register they also plan to steal the patrons' wallets. </p>
+        </section>
+        <section id='jackrabbit'>
+            <h3>Jack Rabbit Slim</h3><img src="images/Marylinmonroe.png" width="200px" height="200px" alt="Marylin Monroe">
+            <p><b>Bowling alley, 435 Flower Street, Glendale, Los Angeles</b><br>Mia and Vincent head to the Jack Rabbit Slim restaurant, sort of 50s pop culture temple where they launch into a wild dance on the Chuck Berry's hit 'You Never Can Tell'. It's actually not a real place – a disused bowling alley on Flower Street in Glendale was used as filming location for the exterior of the restaurant.</p>
+        </section>
+        <section id='butch'>
+            <h3>Butch And Fabienne</h3><img src="images/Butch%20watch.png" width="190px" height="190px" alt="Watch">
+            <p><b>2934 Riverside Drive, Los Angeles</b><br>Butch stays at a motel with his girlfriend Fabienne (Maria de Medeiros) and prepares to leave town to escape from Marsellus Wallace. The two lovebirds savour their success but a last challenge arises when Butch realises that Fabienne forgot to pack his father's watch that has inestimable sentimental value to him.</p>
+        </section>
+        <section id='pawnshop'>
+            <h3>Pawn Shop</h3><img src="images/Samurai_gagball.png" width="200px" height="200px" alt="Samurai sværd og gag ball">
+            <p><b>Crown Pawn Shop, 20933 Roscoe Boulevard, Los Angeles</b><br>The chase leads Butch and Marsellus to some dodgy pawn shop. Although the situation gets bad for Marsellus with Butch having the upper-hand in their struggle, the pawnshop marks the beginning of a new torment for him. Crown Pawn Shop on Roscoe Boulevard was used as filming location for this scene. The place still stands to this day and can be visited; perhaps the most gruesome of Pulp Fiction filming locations due to the scene it's tied to...</p>
+        </section>
+        <section id='jimmie'>
+            <h3>Jimmie's House</h3><img src="images/Cupofcoffee.png" width="200px" height="200px" alt="kaffe">
+            <p><b>4149 Kraft Avenue, Los Angeles</b><br>After taking care of Brett and his friends, Jules and Vincent head to Marsellus' club to give him back his mysterious briefcase. On the way a little mishap happens with Vincent shooting 'their guy' Marvin by mistake. With the car covered with blood they look for a place to take it off the road quickly. They end up in Toluca Lake, a neighborhood of the San Fernando Valley, at the house of Jules' friend, Jimmie, played by Mister Quentin Tarantino himself. There they soon receive the much needed help from the Wolf (Harvey Keitel). It's unclear though if the scenes at Jimmy's house were actually filmed in Toluca Lake.</p>
+        </section>
+    </div>
+    <script>
+        mapboxgl.accessToken = mapboxgl.accessToken = 'pk.eyJ1Ijoiam9oYW5ueWJybyIsImEiOiJjamZtOXd3Y20wd21wMndteHBtcXQ5cjhjIn0.8lKz6J1tIhR_6u6KM0tB6Q';
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/johannybro/cjfjihxknfk6q2sn5uzqp9yo9',
+            center: [-118.31564, 34.09729],
+            zoom: 17,
+            bearing: 27,
+            pitch: 45
+        });
+
+        var chapters = {
+            'ezekiel': {
+                bearing: 27,
+                center: [-118.31564, 34.09729],
+                zoom: 17,
+                pitch: 20
+            },
+            'motherfucker': {
+                duration: 6000,
+                center: [-118.35267, 33.91272],
+                bearing: 150,
+                zoom: 17,
+                pitch: 0
+            },
+            'jackrabbit': {
+                bearing: 90,
+                center: [-118.29059, 34.16245],
+                zoom: 17,
+                speed: 0.8,
+                pitch: 40
+            },
+            'butch': {
+                bearing: 90,
+                center: [-118.26540, 34.11114],
+                zoom: 17
+            },
+            'pawnshop': {
+                bearing: 45,
+                center: [-118.60534, 34.21968],
+                zoom: 17,
+                pitch: 20,
+                speed: 0.5
+            },
+            'jimmie': {
+                bearing: 180,
+                center: [-118.38016, 34.14379],
+                zoom: 17
+            },
+
+
+        };
+
+        // On every scroll event, check which element is on screen
+        window.onscroll = function() {
+            var chapterNames = Object.keys(chapters);
+            for (var i = 0; i < chapterNames.length; i++) {
+                var chapterName = chapterNames[i];
+                if (isElementOnScreen(chapterName)) {
+                    setActiveChapter(chapterName);
+                    break;
+                }
+            }
+        };
+
+        var activeChapterName = 'ezekiel';
+
+        function setActiveChapter(chapterName) {
+            if (chapterName === activeChapterName) return;
+
+            map.flyTo(chapters[chapterName]);
+
+            document.getElementById(chapterName).setAttribute('class', 'active');
+            document.getElementById(activeChapterName).setAttribute('class', '');
+
+            activeChapterName = chapterName;
+        }
+
+        function isElementOnScreen(id) {
+            var element = document.getElementById(id);
+            var bounds = element.getBoundingClientRect();
+            return bounds.top < window.innerHeight && bounds.bottom > 0;
+        }
+    </script>
+
+</body>
+</html>
